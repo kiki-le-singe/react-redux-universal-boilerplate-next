@@ -1,6 +1,10 @@
+import projectConfig from '../../../config'
+
+const { SERVER_HOST, SERVER_PORT } = projectConfig
+
 module.exports = {
-  host: process.env.NODE_HOST || 'localhost',
-  port: process.env.NODE_PORT,
+  host: SERVER_HOST,
+  port: SERVER_PORT,
   app: {
     htmlAttributes: { lang: 'en' },
     title: 'React Starter',
