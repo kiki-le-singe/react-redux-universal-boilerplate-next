@@ -1,4 +1,4 @@
-const defaultConfig = require('./dev');
+const defaultConfig = require('./dev')
 
 const config = {
   // Over write default settings here...

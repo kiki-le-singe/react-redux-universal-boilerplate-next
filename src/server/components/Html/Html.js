@@ -1,9 +1,9 @@
-import Helmet from 'react-helmet';
-import serialize from 'serialize-javascript';
+import Helmet from 'react-helmet'
+import serialize from 'serialize-javascript'
 
 export default (content) => {
-  const head = Helmet.rewind();
-  const assets = webpackIsomorphicTools.assets();
+  const head = Helmet.rewind()
+  const assets = webpackIsomorphicTools.assets()
 
   // Setup html page
   return `
@@ -56,5 +56,5 @@ export default (content) => {
         ${head.script.toString()}
       </body>
     </html>
-  `;
-};
+  `
+}

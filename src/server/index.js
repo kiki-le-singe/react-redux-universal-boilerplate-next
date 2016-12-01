@@ -20,4 +20,4 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(isomorphicToolsConfig
     } else {
       require('./server.prod')
     }
-  });
+  })
