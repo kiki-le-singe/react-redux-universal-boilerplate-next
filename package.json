@@ -101,7 +101,8 @@
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "start:server": "better-npm-run start:server",
-    "start:client:server": "better-npm-run start:client:server"
+    "start:client:server": "better-npm-run start:client:server",
+    "lint": "eslint src tests --ext .jsx,.js"
   },
   "betterScripts": {
     "dev": {
