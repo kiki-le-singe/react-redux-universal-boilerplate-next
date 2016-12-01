@@ -1,171 +1,45 @@
-import path from 'path'
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import StyleLintPlugin from 'stylelint-webpack-plugin'
+import _debug from 'debug'
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
 
 import isomorphicToolsConfig from './isomorphic.tools.config'
+import projectConfig, { paths } from '../config'
 
-const nodeEnv = process.env.NODE_ENV || 'development'
-const isDev = nodeEnv !== 'production'
-
-const webpackIsomorphicToolsPlugin =
-  new WebpackIsomorphicToolsPlugin(isomorphicToolsConfig).development(isDev)
-
-// Disable CSSModules here
-const CSSModules = true
-// Register vendors here
-const vendor = [
-  'react', 'react-dom', 'react-addons-shallow-compare',
-  'redux', 'react-redux',
-  'redux-thunk',
-  'immutable',
-  'react-hot-loader',
-  'react-immutable-proptypes',
-  'redux-immutable',
-  'react-router',
-  'react-router-redux',
-  'react-helmet',
-  'axios',
-  'redbox-react',
-  'chalk',
-]
-
-// Setting the plugins for development/prodcution
-const getPlugins = () => {
-  const plugins = []
-
-  plugins.push(
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        // Javascript lint
-        eslint: {
-          failOnError: true,  // Disable js lint error terminating here
-        },
-        context: '/',         // Required for the sourceMap of css/sass loader
-        debug: isDev,
-        minimize: !isDev,
-      },
-    }),
-    // Style lint
-    new StyleLintPlugin({
-      syntax: 'scss',
-      failOnError: true,      // Disable style lint error terminating here
-    }),
-    // Setup global variables for app
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEV__: isDev,
-    }),
-    new webpack.NoErrorsPlugin(),
-    webpackIsomorphicToolsPlugin,
-  )
-
-  if (isDev) {
-    plugins.push(
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.IgnorePlugin(/webpack-stats\.json$/),
-    )
-  } else {
-    plugins.push(
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: '[name].[chunkhash].js',
-        minChunks: Infinity,
-      }),
-      new ExtractTextPlugin({ filename: '[name].[contenthash].css', allChunks: true }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: { screw_ie8: true, warnings: false },
-        output: { comments: false },
-        sourceMap: false,
-      }),
-      new webpack.optimize.OccurrenceOrderPlugin(true),
-      new webpack.optimize.DedupePlugin(),
-    )
-  }
-
-  return plugins
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphicToolsConfig)
+const debug = _debug('app:webpack:config:dev')
+const srcDir = paths('src')
+const cssLoaderOptions = {
+  modules: true,
+  sourceMap: true,
+  localIdentName: '[name]__[local]___[hash:base64:5]',
 }
+const {
+  SERVER_HOST,
+  VENDOR_DEPENDENCIES,
+  WEBPACK_DEV_SERVER_PORT,
+  __CLIENT__,
+  __SERVER__,
+  __DEV__,
+  __PROD__
+} = projectConfig
 
-// Setting  the entry for development/prodcution
-const getEntry = () => {
-  let entry
-
-  if (isDev) {
-    entry = [
+debug('Create configuration.')
+const config = {
+  context: paths('base'),
+  devtool: 'source-map',
+  entry: {
+    app: [
       'react-hot-loader/patch',
-      'webpack-hot-middleware/client?reload=true&path=http://localhost:3001/__webpack_hmr',
-      './src/client/index.js',
-    ]
-  } else {
-    entry = {
-      main: './src/client/index.js',
-      // Register vendors here
-      vendor,
-    }
-  }
-
-  return entry
-}
-
-// Setting webpack config
-module.exports = {
-  target: 'web',
-  cache: isDev,
-  devtool: isDev ? 'cheap-module-eval-source-map' : 'hidden-source-map',
-  context: path.join(process.cwd()),
-  entry: getEntry(),
-  output: {
-    path: path.join(process.cwd(), './static/dist'),
-    publicPath: '/dist/',
-    // Don't use hashes in dev mode for better performance
-    filename: isDev ? '[name].js' : '[name].[chunkhash].js',
-    chunkFilename: isDev ? '[name].chunk.js' : '[name].[chunkhash].chunk.js',
-  },
-  module: {
-    rules: [
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: isDev,
-          babelrc: false,
-          presets: [['es2015', { modules: false }], 'react', 'stage-0'],
-          plugins: ['transform-runtime', 'react-hot-loader/babel'],
-        },
-      },
-      { test: /\.json$/, loader: 'json-loader' },
-      {
-        test: /\.css$/,
-        loader: isDev ?
-          `style-loader!css-loader?localIdentName=[name]__[local].[hash:base64:5]&${CSSModules ? 'modules' : ''}&sourceMap&-minimize&importLoaders=1!postcss-loader`
-          : ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: `css-loader?${CSSModules ? 'modules' : ''}&sourceMap&importLoaders=1!postcss-loader` }),
-      },
-      {
-        test: /\.scss$/,
-        loader: isDev ?
-          `style-loader!css-loader?localIdentName=[name]__[local].[hash:base64:5]&${CSSModules ? 'modules' : ''}&sourceMap&-minimize&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap`
-          : ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: `css-loader?${CSSModules ? 'modules' : ''}&sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents` }),
-      },
-      { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url-loader?limit=10000' },
-      {
-        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        // Any image below or equal to 10K will be converted to inline base64 instead
-        loaders: [
-          'url-loader?limit=10240',
-          'image-webpack-loader?bypassOnDebug',  // Using for image optimization
-        ],
-      },
+      `webpack-hot-middleware/client?reload=true&path=http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/__webpack_hmr`,
+      paths('entryApp')
     ],
+    vendor: VENDOR_DEPENDENCIES
+  },
+  output: {
+    path: paths('build'),
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
+    publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -174,5 +48,96 @@ module.exports = {
       'node_modules',
     ],
   },
-  plugins: getPlugins(),
+  module: {
+    rules: [
+      {
+        test: /\.js[x]?$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        include: [srcDir],
+        options: {
+          rules: {
+            'no-unused-vars': 'warn'
+          }
+        }
+      },
+      {
+        test: /\.js[x]?$/,
+        loader: 'babel-loader',
+        include: [srcDir],
+        options: {
+          cacheDirectory: true,
+          babelrc: false,
+          presets: [
+            ['latest', { es2015: { modules: false } }],
+            'react',
+            'stage-0'
+          ],
+          plugins: ['transform-runtime', 'react-hot-loader/babel'],
+        }
+      },
+      { test: /\.json$/, loader: 'json-loader' },
+      {
+        test: /\.css$/,
+        include: [srcDir],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { ...cssLoaderOptions, importLoaders: 1 }
+          },
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        include: [srcDir],
+        loaders: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { ...cssLoaderOptions, importLoaders: 2 }
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true,
+            }
+          },
+        ]
+      },
+      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+      {
+        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+        loader: 'url-loader',
+        options: {
+          limit: 10240
+        }
+      }
+    ],
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js',
+      minChunks: 2,
+    }),
+    new webpack.DefinePlugin({
+      __CLIENT__,
+      __SERVER__,
+      __DEV__,
+      __PROD__
+    }),
+    webpackIsomorphicToolsPlugin.development()
+  ]
 }
+
+export default config
