@@ -108,19 +108,22 @@
     "dev": {
       "command": "npm-run-all --parallel start:client:server start:server",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
       }
     },
     "start": {
       "command": "npm run dev",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
       }
     },
     "start:client:server": {
       "command": "babel-node -- webpack/dev.server",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
       }
     },
     "start:server": {
@@ -128,7 +131,7 @@
       "env": {
         "NODE_ENV": "development",
         "NODE_PATH": "src",
-        "NODE_PORT": 3000
+        "DEBUG": "app:*"
       }
     }
   }
