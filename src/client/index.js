@@ -32,7 +32,6 @@ if (module.hot) {
     setImmediate(() => {
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(rootEl)
-      // reRenderApp()
       renderApp()
     })
   })
