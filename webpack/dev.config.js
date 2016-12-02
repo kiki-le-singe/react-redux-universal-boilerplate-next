@@ -9,9 +9,12 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphic
 const debug = _debug('app:webpack:config:dev')
 const srcDir = paths('src')
 const cssLoaderOptions = {
-  modules: true,
   sourceMap: true,
   localIdentName: '[name]__[local]___[hash:base64:5]',
+}
+const scssLoaderOptions = {
+  outputStyle: 'expanded',
+  sourceMap: true,
 }
 const {
   SERVER_HOST,
@@ -84,7 +87,7 @@ const config = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, importLoaders: 1 }
+            options: { ...cssLoaderOptions, modules: true, importLoaders: 1 }
           },
           'postcss-loader'
         ]
@@ -96,16 +99,10 @@ const config = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, importLoaders: 2 }
+            options: { ...cssLoaderOptions, modules: true, importLoaders: 2 }
           },
           'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-            }
-          },
+          { loader: 'sass-loader', options: scssLoaderOptions },
         ]
       },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
