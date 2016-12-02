@@ -1,5 +1,5 @@
 echo "You will use SASS as CSS extension language 😉 . Do you wish to use CSSNEXT 😀 ?";
-echo "This choice is irreversible. Obviously you can use your version control system to discard changes in working directory";
+echo "This choice is irreversible. Obviously you can install the project again or just use your version control system to discard changes in working directory";
 
 select yn in "Yes" "No" "Cancel"; do
   case $yn in
@@ -17,7 +17,7 @@ select yn in "Yes" "No" "Cancel"; do
 
       echo "This setup (bin/setup.sh) will self-destruct 💥 .";
 
-      # rm -rf bin/setup.sh
+      rm -rf bin/setup.sh
 
       echo "Congratulations you are going to use CSSNEXT 👏 .";
 
@@ -30,7 +30,7 @@ select yn in "Yes" "No" "Cancel"; do
 
       echo "This setup (bin/setup.sh) will self-destruct 💥 .";
 
-      # rm -rf bin/setup.sh
+      rm -rf bin/setup.sh
 
       echo "Congratulations you are going to use SASS 👏 .";
 
