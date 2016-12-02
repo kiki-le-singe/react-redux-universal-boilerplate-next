@@ -27,7 +27,6 @@ select yn in "Yes" "No" "Cancel"; do
       echo "All CSSNEXT (styles, config) files are going to be deleted";
 
       rm -rf webpack-assets.json postcss.config.cssnext.js webpack/dev.config.cssnext.js webpack/isomorphic.tools.config.cssnext.js src/common/layouts/AppLayout/index.cssnext.js src/common/styles.cssnext src/common/views/AboutView/AboutView.cssnext.jsx
-      mv src/common/views/AboutView/AboutView.scss src/common/views/AboutView/AboutView.css
 
       echo "This setup (bin/setup.sh) will self-destruct 💥 .";
 
