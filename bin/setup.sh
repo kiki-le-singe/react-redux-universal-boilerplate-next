@@ -4,7 +4,7 @@ echo "This choice is irreversible. Obviously you can use your version control sy
 select yn in "Yes" "No" "Cancel"; do
   case $yn in
     Yes )
-      echo "All SASS (styles, config) files are going to delete";
+      echo "All SASS (styles, config) files are going to be deleted";
 
       rm -rf webpack-assets.json postcss.config.js webpack/dev.config.js webpack/isomorphic.tools.config.js src/common/layouts/AppLayout/index.js src/common/styles src/common/views/AboutView/AboutView.jsx
       mv postcss.config.cssnext.js postcss.config.js
@@ -24,7 +24,7 @@ select yn in "Yes" "No" "Cancel"; do
       break;;
 
     No )
-      echo "All CSSNEXT (styles, config) files are going to delete";
+      echo "All CSSNEXT (styles, config) files are going to be deleted";
 
       rm -rf webpack-assets.json postcss.config.cssnext.js webpack/dev.config.cssnext.js webpack/isomorphic.tools.config.cssnext.js src/common/layouts/AppLayout/index.cssnext.js src/common/styles.cssnext src/common/views/AboutView/AboutView.cssnext.jsx
       mv src/common/views/AboutView/AboutView.scss src/common/views/AboutView/AboutView.css
