@@ -27,18 +27,6 @@ export default (content) => {
             `<link href="${assets.styles[style]}" media="screen, projection" rel="stylesheet" type="text/css" />`)
             .join('\n')
         }
-
-        ${
-          /* Styles will be presented in development mode
-             I put all of the styles here to smoothen the flick */
-          Object.keys(assets.styles).length === 0 ?
-            `<style>${
-              require('../../../common/styles/normalize.css')._style +
-              require('../../../common/layouts/App/App.scss')._style +
-              require('../../../common/views/Home/Home.scss')._style +
-              require('../../../common/components/Hello/Hello.scss')._style
-            }</style>` : ''
-        }
       </head>
       <body>
         <div id="root">${content || ''}</div>
