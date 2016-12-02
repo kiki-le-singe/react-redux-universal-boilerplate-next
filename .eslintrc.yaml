@@ -1,0 +1,36 @@
+extends: airbnb
+env:
+  browser: true
+  node: true
+  es6: true
+parser: babel-eslint
+plugins:
+  - react
+  - jsx-a11y
+  - import
+settings:
+  import/resolver:
+    node:
+      extensions:
+        - .js
+        - .jsx
+      paths:
+        - /src
+      moduleDirectory:
+        - node_modules
+        - src
+globals:
+  __CLIENT__: false
+  __SERVER__: false
+  __DEV__: false
+  __PROD__: false
+  webpackIsomorphicTools: false
+rules:
+  semi: [2, "never"]
+  comma-dangle: 0
+  no-underscore-dangle: off
+  global-require: 0
+  react/forbid-prop-types: 0
+  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
+  react/prefer-stateless-function: [2, {"ignorePureComponents": true}]
+  react/require-extension: "off"

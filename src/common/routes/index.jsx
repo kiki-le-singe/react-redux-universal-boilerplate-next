@@ -1,24 +1,16 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
+import { Route, IndexRoute, Redirect } from 'react-router'
 
-import App from '../layouts/App'
-import Home from '../views/Home'
-
-// export default function createRoutes() {
-//   return {
-//     component: App,
-//     childRoutes: [
-//       {
-//         path: '/',
-//         component: require('../views/Home').default,
-//       },
-//     ],
-//   }
-// }
+import AppLayout from 'common/layouts/AppLayout'
+import HomeView from 'common/views/HomeView'
+import AboutView from 'common/views/AboutView'
+import HelloView from 'common/views/HelloView'
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="home" component={Home} />
+  <Route path="/" component={AppLayout}>
+    <IndexRoute component={HomeView} />
+    <Route path="hello" component={HelloView} />
+    <Route path="about" component={AboutView} />
+    <Redirect from="*" to="hello" />
   </Route>
 )

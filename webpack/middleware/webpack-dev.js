@@ -1,6 +1,10 @@
 import koaWebpackDevMiddleware from 'koa-webpack-dev-middleware'
 import convert from 'koa-convert'
 
+import projectConfig from '../../config'
+
+const { SERVER_HOST, WEBPACK_DEV_SERVER_PORT } = projectConfig
+
 export default function (compiler, options) {
   const webpackDevMiddlewareOptions = {
     ...options,
@@ -14,7 +18,7 @@ export default function (compiler, options) {
     hot: true,
     lazy: false,
     historyApiFallback: true,
-    contentBase: 'http://localhost:3001',
+    contentBase: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}`,
     headers: { 'Access-Control-Allow-Origin': '*' },
   }
 

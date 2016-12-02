@@ -8,13 +8,11 @@ import projectConfig, { paths } from '../config'
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphicToolsConfig)
 const debug = _debug('app:webpack:config:dev')
 const srcDir = paths('src')
+const globalStylesDir = paths('globalStyles')
 const cssLoaderOptions = {
   sourceMap: true,
+  importLoaders: 1,
   localIdentName: '[name]__[local]___[hash:base64:5]',
-}
-const scssLoaderOptions = {
-  outputStyle: 'expanded',
-  sourceMap: true,
 }
 const {
   SERVER_HOST,
@@ -81,28 +79,28 @@ const config = {
       },
       { test: /\.json$/, loader: 'json-loader' },
       {
-        test: /\.css$/,
+        test: webpackIsomorphicToolsPlugin.regular_expression('style_modules'),
         include: [srcDir],
+        exclude: [globalStylesDir],
         use: [
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, modules: true, importLoaders: 1 }
+            options: { ...cssLoaderOptions, modules: true }
           },
           'postcss-loader'
         ]
       },
       {
-        test: /\.scss$/,
+        test: /common\/styles\/global\/app\.css$/,
         include: [srcDir],
         loaders: [
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, modules: true, importLoaders: 2 }
+            options: { ...cssLoaderOptions }
           },
           'postcss-loader',
-          { loader: 'sass-loader', options: scssLoaderOptions },
         ]
       },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },

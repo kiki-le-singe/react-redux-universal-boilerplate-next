@@ -3,6 +3,6 @@
 module.exports = {
   plugins: {
     'postcss-smart-import': {},
-    autoprefixer: {},
+    'postcss-cssnext': {},
   },
 }

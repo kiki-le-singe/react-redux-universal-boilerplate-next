@@ -1,4 +1,3 @@
 {
-  "presets": ["latest", "react", "stage-0"],
-  "plugins": ["system-import-transformer"]
+  "presets": ["latest", "react", "stage-0"]
 }

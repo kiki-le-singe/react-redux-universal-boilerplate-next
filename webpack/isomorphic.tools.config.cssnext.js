@@ -17,7 +17,7 @@ export default {
       parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
     },
     style_modules: {
-      extensions: ['css', 'scss'],
+      extensions: ['css'],
       filter: (module, regex, options, log) => {
         if (options.development) {
           return WebpackIsomorphicToolsPlugin.style_loader_filter(module, regex, options, log)

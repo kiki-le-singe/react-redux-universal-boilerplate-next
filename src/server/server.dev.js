@@ -1,31 +1,34 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
-import { createMemoryHistory, match, RouterContext } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import chalk from 'chalk';
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
+import { createMemoryHistory, match, RouterContext } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 import Koa from 'koa'
 import serve from 'koa-static'
 import proxy from 'koa-proxy'
 import convert from 'koa-convert'
+import _debug from 'debug'
+import projectConfig from '../../config'
 
-// import createRoutes from '../common/routes';
-import routes from '../common/routes';
-import configureStore from '../common/redux/store';
-import config from '../common/config';
-import Html from './components/Html/Html';
+// import createRoutes from '../common/routes'
+import routes from '../common/routes'
+import configureStore from '../common/redux/store'
+import Html from './components/Html/Html'
+
+const { SERVER_HOST, SERVER_PORT, WEBPACK_DEV_SERVER_PORT } = projectConfig
+const debug = _debug('app:server:dev')
 
 const handleRender = (ctx) => {
-  if (__DEV__) webpackIsomorphicTools.refresh();
+  if (__DEV__) webpackIsomorphicTools.refresh()
 
-  const store = configureStore();
+  const store = configureStore()
 
   const _ctx = ctx
   const { url: location } = _ctx
 
-  const memoryHistory = createMemoryHistory(_ctx.url);
-  // const routes = createRoutes(store);
-  const history = syncHistoryWithStore(memoryHistory, store);
+  const memoryHistory = createMemoryHistory(_ctx.url)
+  // const routes = createRoutes(store)
+  const history = syncHistoryWithStore(memoryHistory, store)
 
   match({ history, routes, location }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -39,7 +42,7 @@ const handleRender = (ctx) => {
         <Provider store={store}>
           <RouterContext {...renderProps} />
         </Provider>,
-      );
+      )
 
       // Send the rendered page back to the client
       _ctx.type = 'html'
@@ -57,7 +60,7 @@ const app = new Koa()
 app.use(serve('public'))
 
 app.use(convert(proxy({
-  host: 'http://localhost:3001',
+  host: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}`,
   match: /^\/dist\//,
 })))
 
@@ -69,5 +72,5 @@ app.use(handleRender)
 ***************** */
 
 app.listen(3000, () => {
-  console.info(chalk.green(`==> 🌎  Listening at http://${config.host}:${config.port}`));
+  debug(`Koa server listening at http://${SERVER_HOST}:${SERVER_PORT} in ${app.env} mode`)
 })
