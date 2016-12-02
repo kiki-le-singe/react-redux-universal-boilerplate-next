@@ -7,8 +7,8 @@ module.exports = {
   port: SERVER_PORT,
   app: {
     htmlAttributes: { lang: 'en' },
-    title: 'React Starter',
-    titleTemplate: 'React Starter - %s',
+    title: 'React Redux Universal Boilerplate',
+    titleTemplate: 'React Redux Universal Boilerplate - %s',
     meta: [
       { name: 'description', content: 'Another react universal starter boilerplate.' },
     ],
