@@ -92,13 +92,13 @@ const config = {
         ]
       },
       {
-        test: /common\/styles\/global\/app\.css$/,
-        include: [srcDir],
+        test: webpackIsomorphicToolsPlugin.regular_expression('style_modules'),
+        include: [globalStylesDir],
         loaders: [
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions }
+            options: cssLoaderOptions
           },
           'postcss-loader',
         ]
