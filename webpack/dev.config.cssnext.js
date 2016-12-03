@@ -79,7 +79,7 @@ const config = {
       },
       { test: /\.json$/, loader: 'json-loader' },
       {
-        test: webpackIsomorphicToolsPlugin.regular_expression('style_modules'),
+        test: /\.css$/,
         include: [srcDir],
         exclude: [globalStylesDir],
         use: [
@@ -92,7 +92,7 @@ const config = {
         ]
       },
       {
-        test: webpackIsomorphicToolsPlugin.regular_expression('style_modules'),
+        test: /\.css$/,
         include: [globalStylesDir],
         loaders: [
           'style-loader',
