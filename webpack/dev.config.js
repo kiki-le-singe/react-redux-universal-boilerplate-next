@@ -40,8 +40,8 @@ const config = {
   },
   output: {
     path: paths('build'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
     publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
   },
   resolve: {
@@ -124,7 +124,7 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.js',
+      filename: '[name].[hash].js',
       minChunks: 2,
     }),
     new webpack.DefinePlugin({
