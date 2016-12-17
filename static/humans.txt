@@ -11,7 +11,7 @@
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, CSSNEXT, HTML5
-    Javascript, React, Redux, Normalize.cs
+    CSS3, CSSNEXT, SASS, HTML5
+    Javascript, React, Redux, Normalize.css
     koa
     Webpack, Babel

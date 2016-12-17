@@ -3,6 +3,6 @@
     "webpack/",
     "src/server/index.js",
     "src/server/server.dev.js",
-    "src/server/components/Html/Html.js"
+    "src/server/components/Html/index.jsx"
   ]
 }

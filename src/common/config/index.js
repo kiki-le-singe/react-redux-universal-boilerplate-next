@@ -1,5 +1,3 @@
-if (__DEV__) {
-  module.exports = require('./dev')
-} else {
-  module.exports = require('./prod')
-}
+const config = __DEV__ ? require('./dev').default : require('./prod').default
+
+export default config
