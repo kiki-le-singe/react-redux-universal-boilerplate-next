@@ -1,23 +1,25 @@
 import WebpackIsomorphicTools from 'webpack-isomorphic-tools'
 
 import isomorphicToolsConfig from '../../webpack/isomorphic.tools.config'
+import projectConfig, { paths } from '../../config'
 
-const dirRoot = require('path').join(process.cwd())
+const projectBasePath = paths('base')
 
 /**
  * Define isomorphic constants.
  */
 global.__CLIENT__ = false
 global.__SERVER__ = true
-global.__DEV__ = process.env.NODE_ENV !== 'development'
-global.__PROD__ = process.env.NODE_ENV !== 'production'
+global.__DEV__ = projectConfig.__DEV__
+global.__PROD__ = projectConfig.__PROD__
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools#mainjs
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(isomorphicToolsConfig)
-  .server(dirRoot, () => {
-    if (__DEV__) {
-      require('./server.dev')
-    } else {
-      require('./server.prod')
-    }
-  })
+global.webpackIsomorphicTools =
+  new WebpackIsomorphicTools(isomorphicToolsConfig)
+    .server(projectBasePath, () => {
+      if (__DEV__) {
+        require('./server.dev')
+      } else {
+        require('./server.prod')
+      }
+    })
