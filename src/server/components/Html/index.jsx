@@ -32,8 +32,8 @@ export default class Html extends Component {
     // (will be present only in development mode)
     // It's not mandatory but recommended to speed up loading of styles
     // (resolves the initial style flash (flicker) on page load in development mode)
-    const scssPaths = Object.keys(_assets).filter(asset => asset.includes('.css') || asset.includes('.scss'))
-    return scssPaths.map((style, i) =>
+    const stylesPaths = Object.keys(_assets).filter(asset => asset.includes('.css') || asset.includes('.scss'))
+    return stylesPaths.map((style, i) =>
       <style dangerouslySetInnerHTML={{ __html: _assets[style]._style }} key={i} />
     )
   }
