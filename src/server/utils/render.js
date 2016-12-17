@@ -24,9 +24,9 @@ const handleRender = (ctx) => {
   }
 
   // Compile an initial state
-  const initialState = {}
+  const preloadedState = {}
   // Create a new Redux store instance
-  const store = configureStore(initialState)
+  const store = configureStore(preloadedState)
 
   const _ctx = ctx
   const { url: location } = _ctx
