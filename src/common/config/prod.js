@@ -1,7 +1,7 @@
-const defaultConfig = require('./dev')
+import defaultConfig from './dev'
 
 const config = {
-  // Over write default settings here...
+  // extend and override dev config here.
 }
 
-module.exports = Object.assign({}, defaultConfig, config)
+export default { ...defaultConfig, config }
