@@ -28,6 +28,7 @@ const {
 
 debug('Create configuration.')
 const config = {
+  cache: true,
   context: paths('base'),
   devtool: 'source-map',
   entry: {
