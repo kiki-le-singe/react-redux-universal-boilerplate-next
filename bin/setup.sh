@@ -6,9 +6,10 @@ select yn in "Yes" "No" "Cancel"; do
     Yes )
       echo "All SASS (styles, config) files are going to be deleted";
 
-      rm -rf webpack-assets.json postcss.config.js webpack/dev.config.js webpack/isomorphic.tools.config.js src/common/layouts/AppLayout/index.js src/common/styles src/common/views/AboutView/AboutView.jsx;
+      rm -rf webpack-assets.json postcss.config.js webpack/dev.config.js webpack/prod.config.js webpack/isomorphic.tools.config.js src/common/layouts/AppLayout/index.js src/common/styles src/common/views/AboutView/AboutView.jsx;
       mv postcss.config.cssnext.js postcss.config.js;
       mv webpack/dev.config.cssnext.js webpack/dev.config.js;
+      mv webpack/prod.config.cssnext.js webpack/prod.config.js;
       mv webpack/isomorphic.tools.config.cssnext.js webpack/isomorphic.tools.config.js;
       mv src/common/layouts/AppLayout/index.cssnext.js src/common/layouts/AppLayout/index.js;
       mv src/common/styles.cssnext src/common/styles;
@@ -26,7 +27,7 @@ select yn in "Yes" "No" "Cancel"; do
     No )
       echo "All CSSNEXT (styles, config) files are going to be deleted";
 
-      rm -rf webpack-assets.json postcss.config.cssnext.js webpack/dev.config.cssnext.js webpack/isomorphic.tools.config.cssnext.js src/common/layouts/AppLayout/index.cssnext.js src/common/styles.cssnext src/common/views/AboutView/AboutView.cssnext.jsx;
+      rm -rf webpack-assets.json postcss.config.cssnext.js webpack/dev.config.cssnext.js webpack/prod.config.cssnext.js webpack/isomorphic.tools.config.cssnext.js src/common/layouts/AppLayout/index.cssnext.js src/common/styles.cssnext src/common/views/AboutView/AboutView.cssnext.jsx;
 
       echo "This setup (bin/setup.sh) will self-destruct 💥 .";
 
