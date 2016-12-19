@@ -9,6 +9,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphic
 const debug = _debug('app:webpack:config:dev')
 const srcDir = paths('src')
 const cssLoaderOptions = {
+  modules: true,
   sourceMap: true,
   localIdentName: '[name]__[local]___[hash:base64:5]',
 }
@@ -44,8 +45,8 @@ const config = {
   },
   output: {
     path: paths('build'),
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
   },
   resolve: {
@@ -80,7 +81,7 @@ const config = {
             'react',
             'stage-0'
           ],
-          plugins: ['transform-runtime', 'react-hot-loader/babel'],
+          plugins: ['transform-runtime', 'react-hot-loader/babel', 'transform-react-jsx-source'],
         }
       },
       { test: /\.json$/, loader: 'json-loader' },
@@ -91,7 +92,7 @@ const config = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, modules: true, importLoaders: 1 }
+            options: { ...cssLoaderOptions, importLoaders: 1 }
           },
           'postcss-loader'
         ]
@@ -103,7 +104,7 @@ const config = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { ...cssLoaderOptions, modules: true, importLoaders: 2 }
+            options: { ...cssLoaderOptions, importLoaders: 2 }
           },
           'postcss-loader',
           { loader: 'sass-loader', options: scssLoaderOptions },
@@ -128,7 +129,6 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: '[name].[hash].js',
       minChunks: 2,
     }),
     new webpack.DefinePlugin({
