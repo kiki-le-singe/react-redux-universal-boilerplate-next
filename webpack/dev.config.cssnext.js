@@ -42,8 +42,8 @@ const config = {
   },
   output: {
     path: paths('build'),
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
   },
   resolve: {
@@ -78,7 +78,7 @@ const config = {
             'react',
             'stage-0'
           ],
-          plugins: ['transform-runtime', 'react-hot-loader/babel'],
+          plugins: ['transform-runtime', 'react-hot-loader/babel', 'transform-react-jsx-source'],
         }
       },
       { test: /\.json$/, loader: 'json-loader' },
@@ -126,7 +126,6 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: '[name].[hash].js',
       minChunks: 2,
     }),
     new webpack.DefinePlugin({

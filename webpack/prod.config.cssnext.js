@@ -1,6 +1,9 @@
 import webpack from 'webpack'
 import _debug from 'debug'
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
+import WebpackMd5Hash from 'webpack-md5-hash'
 
 import isomorphicToolsConfig from './isomorphic.tools.config'
 import projectConfig, { paths } from '../config'
@@ -8,19 +11,22 @@ import projectConfig, { paths } from '../config'
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphicToolsConfig)
 const debug = _debug('app:webpack:config:dev')
 const srcDir = paths('src')
-const cssLoaderOptions = {
-  modules: true,
-  sourceMap: true,
-  localIdentName: '[name]__[local]___[hash:base64:5]',
-}
-const scssLoaderOptions = {
-  outputStyle: 'expanded',
-  sourceMap: true,
+const globalStylesDir = paths('globalStyles')
+const cssLoaderOptions = (modules = false) => {
+  const options = [
+    'sourceMap',
+    'importLoaders=1',
+    'localIdentName=[name]__[local]___[hash:base64:5]',
+  ]
+
+  if (modules) {
+    options.push('modules')
+  }
+
+  return options.join('&')
 }
 const {
-  SERVER_HOST,
   VENDOR_DEPENDENCIES,
-  WEBPACK_DEV_SERVER_PORT,
   __CLIENT__,
   __SERVER__,
   __DEV__,
@@ -29,25 +35,17 @@ const {
 
 debug('Create configuration.')
 const config = {
-  performance: {
-    hints: false
-  },
-  cache: true,
   context: paths('base'),
   devtool: 'source-map',
   entry: {
-    app: [
-      'react-hot-loader/patch',
-      `webpack-hot-middleware/client?reload=true&path=http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/__webpack_hmr`,
-      paths('entryApp')
-    ],
+    app: paths('entryApp'),
     vendor: VENDOR_DEPENDENCIES
   },
   output: {
-    path: paths('build'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
-    publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
+    path: paths('dist'),
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
+    publicPath: '/dist/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -63,11 +61,6 @@ const config = {
         enforce: 'pre',
         loader: 'eslint-loader',
         include: [srcDir],
-        options: {
-          rules: {
-            'no-unused-vars': 'warn'
-          }
-        }
       },
       {
         test: /\.js[x]?$/,
@@ -75,40 +68,25 @@ const config = {
         include: [srcDir],
         options: {
           cacheDirectory: true,
-          babelrc: false,
-          presets: [
-            ['latest', { es2015: { modules: false } }],
-            'react',
-            'stage-0'
-          ],
-          plugins: ['transform-runtime', 'react-hot-loader/babel', 'transform-react-jsx-source'],
         }
       },
       { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.css$/,
         include: [srcDir],
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: { ...cssLoaderOptions, importLoaders: 1 }
-          },
-          'postcss-loader'
-        ]
+        exclude: [globalStylesDir],
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: `css-loader?${cssLoaderOptions(true)}!postcss-loader`
+        })
       },
       {
-        test: /\.scss$/,
-        include: [srcDir],
-        loaders: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: { ...cssLoaderOptions, importLoaders: 2 }
-          },
-          'postcss-loader',
-          { loader: 'sass-loader', options: scssLoaderOptions },
-        ]
+        test: /\.css$/,
+        include: [globalStylesDir],
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: `css-loader?${cssLoaderOptions()}!postcss-loader`
+        })
       },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
@@ -125,19 +103,53 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: 2,
+    // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     }),
+    new CleanWebpackPlugin(['static/dist', 'webpack-assets.json'], {
+      root: paths('base')
+    }),
+    new ExtractTextPlugin({ filename: '[name].[contenthash].css', disable: false, allChunks: true }),
     new webpack.DefinePlugin({
       __CLIENT__,
       __SERVER__,
       __DEV__,
       __PROD__
     }),
-    webpackIsomorphicToolsPlugin.development()
+
+    // optimizations
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        sequences: true,
+        dead_code: true,
+        drop_debugger: true,
+        comparisons: true,
+        conditionals: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        hoist_funs: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        drop_console: true
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: 2,
+    }),
+    new WebpackMd5Hash(),
+    webpackIsomorphicToolsPlugin
   ]
 }
 
