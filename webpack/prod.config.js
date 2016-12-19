@@ -13,7 +13,6 @@ const debug = _debug('app:webpack:config:prod')
 const srcDir = paths('src')
 const cssLoaderOptions = (sass = false) => {
   const options = [
-    'css?',
     'modules',
     'sourceMap',
     'localIdentName=[name]__[local]___[hash:base64:5]'
