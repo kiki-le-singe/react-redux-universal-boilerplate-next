@@ -104,7 +104,7 @@
     "url-loader": "^0.5.7"
   },
   "scripts": {
-    "build": "better-npm-run build",
+    "build:client": "better-npm-run build:client",
     "deploy": "better-npm-run deploy",
     "prod": "better-npm-run prod",
     "start": "better-npm-run start",
@@ -152,9 +152,9 @@
       }
     },
     "deploy": {
-      "command": "npm run build && npm run prod"
+      "command": "npm run build:client && npm run prod"
     },
-    "build": {
+    "build:client": {
       "command": "./node_modules/.bin/babel-node node_modules/.bin/webpack --progress --config webpack/prod.config",
       "env": {
         "NODE_ENV": "production",
