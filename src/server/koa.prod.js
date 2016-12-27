@@ -9,7 +9,7 @@ const debug = _debug('app:server:prod')
 const app = new Koa()
 const { SERVER_HOST, SERVER_PORT } = projectConfig
 
-app.use(serve('readyToDeploy/static'))
+app.use(serve('static'))
 
 // This is fired every time the server side receives a request
 app.use(handleRender)
