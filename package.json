@@ -136,7 +136,7 @@
       }
     },
     "start:server": {
-      "command": "nodemon src/server/index",
+      "command": "nodemon ./node_modules/.bin/babel-node -- src/server/index",
       "env": {
         "NODE_ENV": "development",
         "NODE_PATH": "src",
@@ -144,15 +144,13 @@
       }
     },
     "prod": {
-      "command": "node src/server/index",
+      "command": "node readyToDeploy/server",
       "env": {
-        "NODE_ENV": "production",
-        "NODE_PATH": "src",
         "DEBUG": "app:*"
       }
     },
     "deploy": {
-      "command": "npm run build:client && npm run prod"
+      "command": "npm run build:client && npm run build:server && npm run prod"
     },
     "build:client": {
       "command": "./node_modules/.bin/babel-node node_modules/.bin/webpack --progress --config webpack/prod.config",
