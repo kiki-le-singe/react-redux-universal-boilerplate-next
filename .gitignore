@@ -10,6 +10,8 @@ reports
 coverage
 readyToDeploy/*
 !readyToDeploy/static
+!readyToDeploy/package.json
+!readyToDeploy/yarn.lock
 readyToDeploy/static/dist/
 
 # webpack-isomorphic-tools
