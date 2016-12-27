@@ -24,7 +24,6 @@ const config = {
     'react-router',
     'react-router-redux',
     'redux',
-    // 'classnames'
   ],
 
   // Project Structure
