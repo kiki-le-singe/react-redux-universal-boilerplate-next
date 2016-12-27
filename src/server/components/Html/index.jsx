@@ -44,7 +44,7 @@ export default class Html extends Component {
     const htmlAttributes = head.htmlAttributes.toComponent()
 
     return (
-      <html {...htmlAttributes}>
+      <html lang={htmlAttributes.lang}>
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
