@@ -110,7 +110,7 @@ const config = {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new CleanWebpackPlugin(['static/dist', 'webpack-assets.json'], {
+    new CleanWebpackPlugin(['readyToDeploy/static/dist', 'webpack-assets.json'], {
       root: paths('base')
     }),
     new ExtractTextPlugin({ filename: '[name].[contenthash].css', disable: false, allChunks: true }),
