@@ -2,6 +2,10 @@
   "name": "react-redux-universal-boilerplate",
   "version": "0.0.0",
   "description": "Get started with a Universal boilerplate containing tools like React, Redux, Koa...",
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": "^3.8.6"
+  },
   "main": "server.js",
   "dependencies": {
     "babel-runtime": "^6.20.0",
