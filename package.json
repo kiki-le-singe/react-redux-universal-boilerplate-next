@@ -110,7 +110,6 @@
     "build:client": "better-npm-run build:client",
     "build:server": "better-npm-run build:server",
     "deploy": "better-npm-run deploy",
-    "prod": "better-npm-run prod",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "start:server": "better-npm-run start:server",
@@ -147,14 +146,8 @@
         "DEBUG": "app:*"
       }
     },
-    "prod": {
-      "command": "node readyToDeploy/server",
-      "env": {
-        "DEBUG": "app:*"
-      }
-    },
     "deploy": {
-      "command": "npm run build:client && npm run build:server && npm run prod"
+      "command": "npm run build:client && npm run build:server"
     },
     "build:client": {
       "command": "./node_modules/.bin/babel-node node_modules/.bin/webpack --progress --config webpack/prod.config",
