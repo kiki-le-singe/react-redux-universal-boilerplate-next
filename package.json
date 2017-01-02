@@ -128,6 +128,7 @@
       "command": "npm run dev",
       "env": {
         "NODE_ENV": "development",
+        "BABEL_ENV": "server",
         "DEBUG": "app:*"
       }
     },
@@ -161,6 +162,7 @@
       "command": "./node_modules/.bin/babel-node node_modules/.bin/webpack --progress --config webpack/server.config",
       "env": {
         "NODE_ENV": "production",
+        "BABEL_ENV": "server",
         "NODE_PATH": "src",
         "DEBUG": "app:*"
       }
