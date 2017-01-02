@@ -78,6 +78,7 @@
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-system-import-transformer": "^2.4.0",
     "babel-plugin-transform-react-jsx-source": "^6.9.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-latest": "^6.16.0",
@@ -128,6 +129,7 @@
       "command": "npm run dev",
       "env": {
         "NODE_ENV": "development",
+        "BABEL_ENV": "server",
         "DEBUG": "app:*"
       }
     },
@@ -161,6 +163,7 @@
       "command": "./node_modules/.bin/babel-node node_modules/.bin/webpack --progress --config webpack/server.config",
       "env": {
         "NODE_ENV": "production",
+        "BABEL_ENV": "server",
         "NODE_PATH": "src",
         "DEBUG": "app:*"
       }

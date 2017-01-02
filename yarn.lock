@@ -519,6 +519,10 @@ babel-plugin-syntax-trailing-function-commas@^6.3.13, babel-plugin-syntax-traili
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.20.0.tgz#442835e19179f45b87e92d477d70b9f1f18b5c4f"
 
+babel-plugin-system-import-transformer@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-system-import-transformer/-/babel-plugin-system-import-transformer-2.4.0.tgz#92c8c2a25b211f152ccac996ff43ae5b08f6de9c"
+
 babel-plugin-transform-async-generator-functions@^6.17.0:
   version "6.17.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-async-generator-functions/-/babel-plugin-transform-async-generator-functions-6.17.0.tgz#d0b5a2b2f0940f2b245fa20a00519ed7bc6cae54"

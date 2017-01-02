@@ -14,7 +14,7 @@ const rootEl = document.getElementById('root')
 
 const renderApp = () => {
   // Sync routes both on client and server
-  match({ history, routes }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: routes(store) }, (error, redirectLocation, renderProps) => {
     render(
       <AppContainer>
         <Provider store={store}>

@@ -148,7 +148,7 @@ const config = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: 2,
+      minChunks: Infinity,
     }),
     new WebpackMd5Hash(),
     webpackIsomorphicToolsPlugin
