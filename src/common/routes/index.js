@@ -10,7 +10,7 @@ import NotFoundRoute from './NotFoundRoute'
 export default store => ({ // eslint-disable-line
   path: '/',
   component: AppLayout,
-  indexRoute: HomeRoute,
+  indexRoute: HomeRoute(),
   childRoutes: [
     HelloRoute(),
     AboutRoute(),
