@@ -129,7 +129,7 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: 2,
+      minChunks: Infinity,
     }),
     new webpack.DefinePlugin({
       __CLIENT__,
