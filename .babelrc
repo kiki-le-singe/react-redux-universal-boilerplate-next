@@ -11,5 +11,10 @@
         ]
       ]
     }
+  },
+  "env": {
+    "server": {
+      "plugins": ["system-import-transformer"]
+    }
   }
 }
