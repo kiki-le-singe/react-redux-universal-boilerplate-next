@@ -33,7 +33,7 @@ const handleRender = (ctx) => {
   const memoryHistory = createMemoryHistory(_ctx.url)
   const history = syncHistoryWithStore(memoryHistory, store)
 
-  match({ history, routes, location }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: routes(store), location }, (error, redirectLocation, renderProps) => {
     if (error) {
       _ctx.status = 500
       _ctx.body = error.message
