@@ -23,7 +23,7 @@ const config = {
     libraryTarget: 'commonjs2',
     publicPath: '/dist_server/',
   },
-  node: {
+  node: { // https://webpack.github.io/docs/configuration.html#node
     console: true,
     global: true,
     process: true,
