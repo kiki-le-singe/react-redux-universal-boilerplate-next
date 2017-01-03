@@ -72,6 +72,7 @@
     "webpack": "^2.2.0-rc.1",
     "webpack-isomorphic-tools": "^2.6.5",
     "webpack-md5-hash": "^0.0.5",
+    "why-did-you-update": "^0.0.8",
     "yargs": "^6.5.0"
   },
   "devDependencies": {
