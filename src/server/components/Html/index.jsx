@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
+import serialize from 'serialize-javascript'
 
 export default class Html extends Component {
   static propTypes = {
@@ -60,7 +61,7 @@ export default class Html extends Component {
 
         <body>
           <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(component) }} />
-          <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__=${JSON.stringify(store.getState())};` }} />
+          <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__=${serialize(store.getState())};` }} />
           {this.scripts}
         </body>
       </html>

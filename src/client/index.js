@@ -7,8 +7,8 @@ import { AppContainer } from 'react-hot-loader'
 import configureStore from '../common/redux/store'
 import routes from '../common/routes'
 
-const initialState = window.__PRELOADED_STATE__
-const store = configureStore(initialState)
+const preloadedState = window.__PRELOADED_STATE__
+const store = configureStore(preloadedState)
 const history = syncHistoryWithStore(browserHistory, store)
 const rootEl = document.getElementById('root')
 
