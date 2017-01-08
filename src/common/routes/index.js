@@ -8,6 +8,7 @@ import AboutRoute from './AboutRoute'
 import CounterRoute from './CounterRoute'
 import NotFoundRoute from './NotFoundRoute'
 
+// Possibility to pass the store to routes: HelloRoute(store)
 export default store => ({ // eslint-disable-line
   path: '/',
   component: AppLayout,
@@ -16,5 +17,6 @@ export default store => ({ // eslint-disable-line
     HelloRoute(),
     AboutRoute(),
     CounterRoute(),
+    NotFoundRoute(), // this route must be at end because (path: '*').
   ],
 })
