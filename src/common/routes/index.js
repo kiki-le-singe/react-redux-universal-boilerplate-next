@@ -5,6 +5,7 @@ import AppLayout from 'common/layouts/AppLayout'
 import HomeRoute from './HomeRoute'
 import HelloRoute from './HelloRoute'
 import AboutRoute from './AboutRoute'
+import CounterRoute from './CounterRoute'
 import NotFoundRoute from './NotFoundRoute'
 
 export default store => ({ // eslint-disable-line
@@ -14,6 +15,6 @@ export default store => ({ // eslint-disable-line
   childRoutes: [
     HelloRoute(),
     AboutRoute(),
-    NotFoundRoute(),
+    CounterRoute(),
   ],
 })
