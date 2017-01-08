@@ -1,13 +1,11 @@
 import webpack from 'webpack'
 import _debug from 'debug'
-import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
 
-import isomorphicToolsConfig from './isomorphic.tools.config'
 import projectConfig, { paths } from '../config'
 
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphicToolsConfig)
-const debug = _debug('app:webpack:config:dev')
+const debug = _debug('app:webpack:config:test')
 const srcDir = paths('src')
+const testDir = paths('test')
 const globalStylesDir = paths('globalStyles')
 const cssLoaderOptions = {
   sourceMap: true,
@@ -15,13 +13,10 @@ const cssLoaderOptions = {
   localIdentName: '[name]__[local]___[hash:base64:5]',
 }
 const {
-  SERVER_HOST,
-  VENDOR_DEPENDENCIES,
-  WEBPACK_DEV_SERVER_PORT,
   __CLIENT__,
   __SERVER__,
   __DEV__,
-  __PROD__
+  __PROD__,
 } = projectConfig
 
 debug('Create configuration.')
@@ -29,57 +24,27 @@ const config = {
   performance: {
     hints: false
   },
-  cache: true,
-  context: paths('base'),
   devtool: 'source-map',
-  entry: {
-    app: [
-      'react-hot-loader/patch',
-      `webpack-hot-middleware/client?reload=true&path=http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/__webpack_hmr`,
-      paths('entryApp')
-    ],
-    vendor: VENDOR_DEPENDENCIES
-  },
-  output: {
-    path: paths('build'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
-    publicPath: `http://${SERVER_HOST}:${WEBPACK_DEV_SERVER_PORT}/build/`
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: [
       'src',
       'node_modules',
     ],
+    alias: {
+      sinon: 'sinon/pkg/sinon'
+    }
   },
   module: {
+    noParse: [
+      /\/sinon\.js/
+    ],
     rules: [
       {
         test: /\.js[x]?$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        include: [srcDir],
-        options: {
-          rules: {
-            'no-unused-vars': 'warn'
-          }
-        }
-      },
-      {
-        test: /\.js[x]?$/,
         loader: 'babel-loader',
-        include: [srcDir],
-        options: {
-          cacheDirectory: true,
-          babelrc: false,
-          presets: [
-            ['latest', { es2015: { modules: false } }],
-            'react',
-            'stage-0'
-          ],
-          plugins: ['transform-runtime', 'react-hot-loader/babel', 'transform-react-jsx-source'],
-        }
+        include: [srcDir, testDir],
+        options: { cacheDirectory: true }
       },
       { test: /\.json$/, loader: 'json-loader' },
       {
@@ -113,29 +78,25 @@ const config = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
       {
-        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+        test: /\.(png|jpe?g|gif|ico|svg)$/,
         loader: 'url-loader',
-        options: {
-          limit: 10240
-        }
+        options: { limit: 10240 }
       }
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
     new webpack.DefinePlugin({
       __CLIENT__,
       __SERVER__,
       __DEV__,
       __PROD__
-    }),
-    webpackIsomorphicToolsPlugin.development()
-  ]
+    })
+  ],
+  externals: {
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  }
 }
 
 export default config
