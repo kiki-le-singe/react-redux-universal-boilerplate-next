@@ -96,10 +96,19 @@ const config = {
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
       {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        loader: 'url-loader',
-        options: {
-          limit: 10240
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 10240 }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              optimizationLevel: 7,
+            }
+          }
+        ]
       }
     ],
   },
