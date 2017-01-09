@@ -32,7 +32,7 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
-compressible@^2.0.0:
+compressible@^2.0.0, compressible@~2.0.6:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.9.tgz#6daab4e2b599c2770dd9e21e7a891b1c5a755425"
   dependencies:
@@ -124,6 +124,10 @@ fbjs@^0.8.1, fbjs@^0.8.4:
 fresh@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.3.0.tgz#651f838e22424e7566de161d8358caa199f83d4f"
+
+fs-readdir-recursive@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fs-readdir-recursive/-/fs-readdir-recursive-1.0.0.tgz#8cd1745c8b4f8a29c8caec392476921ba195f560"
 
 history@^3.0.0:
   version "3.2.1"
@@ -240,6 +244,16 @@ koa-send@^3.2.0:
     mz "^2.3.1"
     resolve-path "^1.3.1"
 
+koa-static-cache@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/koa-static-cache/-/koa-static-cache-3.2.0.tgz#54886189653bc4dc9a72e6312c19dba40c73ed89"
+  dependencies:
+    compressible "~2.0.6"
+    debug "*"
+    fs-readdir-recursive "~1.0.0"
+    mime-types "~2.1.8"
+    mz "~2.4.0"
+
 koa-static@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/koa-static/-/koa-static-3.0.0.tgz#40442233d2c0b35c225e450199c10bf8a539e416"
@@ -298,7 +312,7 @@ media-typer@0.3.0:
   version "1.25.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.25.0.tgz#c18dbd7c73a5dbf6f44a024dc0d165a1e7b1c392"
 
-mime-types@^2.0.7, mime-types@~2.1.11, mime-types@~2.1.13:
+mime-types@^2.0.7, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.8:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
   dependencies:
@@ -311,6 +325,14 @@ ms@0.7.2:
 mz@^2.3.1:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/mz/-/mz-2.6.0.tgz#c8b8521d958df0a4f2768025db69c719ee4ef1ce"
+  dependencies:
+    any-promise "^1.0.0"
+    object-assign "^4.0.1"
+    thenify-all "^1.0.0"
+
+mz@~2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/mz/-/mz-2.4.0.tgz#987ba9624d89395388c37cb4741e2caf4dd13b1a"
   dependencies:
     any-promise "^1.0.0"
     object-assign "^4.0.1"
