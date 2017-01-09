@@ -118,9 +118,14 @@ const config = {
     new PurifyCSSPlugin({
       basePath: __dirname,
       purifyOptions: {
+        info: true,
         minify: true,
         whitelist: ['*title*', '*h2*'],
-      }
+      },
+      paths: [
+        'src/**/*.jsx',
+        'src/**/*.js',
+      ]
     }),
     new webpack.DefinePlugin({
       __CLIENT__,
