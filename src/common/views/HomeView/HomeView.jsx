@@ -12,7 +12,7 @@ export default function Home() {
       <h2>Home</h2>
 
       <div className="view__content">
-        <p><img src={logoImage} alt="Kiki" /></p>
+        <p><img src={logoImage} alt="Kiki" width="300" height="300" /></p>
       </div>
     </div>
   )
