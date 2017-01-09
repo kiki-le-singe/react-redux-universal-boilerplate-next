@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import _debug from 'debug'
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import PurifyCSSPlugin from 'purifycss-webpack-plugin'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import WebpackMd5Hash from 'webpack-md5-hash'
 
@@ -114,6 +115,13 @@ const config = {
       root: paths('base')
     }),
     new ExtractTextPlugin({ filename: '[name].[contenthash].css', disable: false, allChunks: true }),
+    new PurifyCSSPlugin({
+      basePath: __dirname,
+      purifyOptions: {
+        minify: true,
+        whitelist: ['*title*', '*h2*'],
+      }
+    }),
     new webpack.DefinePlugin({
       __CLIENT__,
       __SERVER__,
