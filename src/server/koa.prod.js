@@ -26,10 +26,7 @@ app.use(serve('static'))
 // This is fired every time the server side receives a request
 app.use(handleRender)
 
-/* ****************
- START THE SERVER
-***************** */
-
+// Start the server
 app.listen(SERVER_PORT, () => {
   debug(`Koa server listening at http://${SERVER_HOST}:${SERVER_PORT} in production mode`)
 })
