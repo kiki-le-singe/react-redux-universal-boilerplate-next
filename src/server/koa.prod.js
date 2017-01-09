@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import compress from 'koa-compress'
 import staticCache from 'koa-static-cache'
+import htmlMinifier from 'koa-html-minifier'
 import _debug from 'debug'
 import serve from 'koa-static'
 import convert from 'koa-convert'
@@ -16,6 +17,27 @@ app.use(compress({
   threshold: 2048,
   flush: require('zlib').Z_SYNC_FLUSH
 }))
+
+app.use(convert(htmlMinifier({
+  caseSensitive: true,
+  removeComments: true,
+  removeCommentsFromCDATA: true,
+  removeCDATASectionsFromCDATA: true,
+  collapseWhitespace: true,
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  removeAttributeQuotes: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  useShortDoctype: true,
+  removeEmptyAttributes: true,
+  removeOptionalTags: true,
+  minifyJS: true,
+  minifyCSS: true,
+  minifyURLs: true,
+  decodeEntities: true,
+})))
 
 app.use(convert(staticCache(paths('staticDir'), {
   maxAge: 365 * 24 * 60 * 60 // Add these files to caches for a year
