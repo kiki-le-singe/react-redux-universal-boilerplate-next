@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import helmet from 'koa-helmet'
 import compress from 'koa-compress'
 import staticCache from 'koa-static-cache'
 import htmlMinifier from 'koa-html-minifier'
@@ -12,6 +13,8 @@ import projectConfig, { paths } from '../../config'
 const debug = _debug('app:server:prod')
 const app = new Koa()
 const { SERVER_HOST, SERVER_PORT } = projectConfig
+
+app.use(helmet())
 
 app.use(compress({
   threshold: 2048,
