@@ -13,6 +13,9 @@
     },
     "server": {
       "plugins": ["system-import-transformer"]
+    },
+    "production": {
+      "presets": ["react-optimize"]
     }
   }
 }
