@@ -27,6 +27,8 @@
     "hmr",
     "koa",
     "postcss",
+    "cssnext",
+    "sass",
     "css-modules",
     "isomorphic",
     "universal",
