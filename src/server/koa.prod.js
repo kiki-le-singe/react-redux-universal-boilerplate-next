@@ -1,10 +1,12 @@
 import Koa from 'koa'
 import compress from 'koa-compress'
+import staticCache from 'koa-static-cache'
 import _debug from 'debug'
 import serve from 'koa-static'
+import convert from 'koa-convert'
 
 import handleRender from 'server/utils/render'
-import projectConfig from '../../config'
+import projectConfig, { paths } from '../../config'
 
 const debug = _debug('app:server:prod')
 const app = new Koa()
@@ -14,6 +16,10 @@ app.use(compress({
   threshold: 2048,
   flush: require('zlib').Z_SYNC_FLUSH
 }))
+
+app.use(convert(staticCache(paths('staticDir'), {
+  maxAge: 365 * 24 * 60 * 60 // Add these files to caches for a year
+})))
 
 app.use(serve('static'))
 
