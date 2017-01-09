@@ -54,6 +54,7 @@ const paths = (dir = 'base') => {
     globalStyles: base(config.DIR_SRC, config.DIR_GLOBAL_STYLES),
     dist: base(config.DIR_READY_TO_DEPLOY, config.DIR_STATIC, config.DIR_DIST),
     distServer: base(config.DIR_READY_TO_DEPLOY),
+    staticDir: base(config.DIR_STATIC),
     build: base(config.DIR_BUILD),
     server: base(config.DIR_SERVER),
     test: base(config.DIR_TEST),

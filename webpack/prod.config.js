@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import _debug from 'debug'
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import PurifyCSSPlugin from 'purifycss-webpack-plugin'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import WebpackMd5Hash from 'webpack-md5-hash'
 
@@ -98,10 +99,19 @@ const config = {
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
       {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        loader: 'url-loader',
-        options: {
-          limit: 10240
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 10240 }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              optimizationLevel: 7,
+            }
+          }
+        ]
       }
     ],
   },
@@ -114,6 +124,18 @@ const config = {
       root: paths('base')
     }),
     new ExtractTextPlugin({ filename: '[name].[contenthash].css', disable: false, allChunks: true }),
+    new PurifyCSSPlugin({
+      basePath: __dirname,
+      purifyOptions: {
+        info: true,
+        minify: true,
+        whitelist: ['*title*', '*h2*'],
+      },
+      paths: [
+        'src/**/*.jsx',
+        'src/**/*.js',
+      ]
+    }),
     new webpack.DefinePlugin({
       __CLIENT__,
       __SERVER__,
