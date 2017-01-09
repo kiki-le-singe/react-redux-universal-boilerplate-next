@@ -57,6 +57,7 @@
     "koa": "^2.0.0",
     "koa-compress": "next",
     "koa-convert": "^1.2.0",
+    "koa-html-minifier": "^1.0.1",
     "koa-proxy": "^0.6.0",
     "koa-static": "^3.0.0",
     "koa-static-cache": "^3.2.0",

@@ -1292,6 +1292,13 @@ callsites@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-0.2.0.tgz#afab96262910a7f33c19a5775825c69f34e350ca"
 
+camel-case@3.0.x:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/camel-case/-/camel-case-3.0.0.tgz#ca3c3688a4e9cf3a4cda777dc4dcbc713249cf73"
+  dependencies:
+    no-case "^2.2.0"
+    upper-case "^1.1.1"
+
 camelcase-keys@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-2.1.0.tgz#308beeaffdf28119051efa1d932213c91b8f92e7"
@@ -1410,7 +1417,7 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-clean-css@^3.2.10:
+clean-css@3.4.x, clean-css@^3.2.10:
   version "3.4.23"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.23.tgz#604fbbca24c12feb59b02f00b84f1fb7ded6d001"
   dependencies:
@@ -1542,7 +1549,7 @@ commander@2.8.x:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-commander@2.9.0, commander@^2.8.1, commander@^2.9.0:
+commander@2.9.0, commander@2.9.x, commander@^2.8.1, commander@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
@@ -2998,6 +3005,10 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
+he@1.1.x:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/he/-/he-1.1.0.tgz#29319d49beec13a9b1f3c4f9b2a6dde4859bb2a7"
+
 history@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/history/-/history-3.2.1.tgz#71c7497f4e6090363d19a6713bb52a1bfcdd99aa"
@@ -3033,6 +3044,19 @@ html-comment-regex@^1.1.0:
 html-entities@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.0.tgz#41948caf85ce82fed36e4e6a0ed371a6664379e2"
+
+html-minifier@*:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.2.3.tgz#d2ff536e24d95726c332493d8f77d84dbed85372"
+  dependencies:
+    camel-case "3.0.x"
+    clean-css "3.4.x"
+    commander "2.9.x"
+    he "1.1.x"
+    ncname "1.0.x"
+    param-case "2.1.x"
+    relateurl "0.2.x"
+    uglify-js "2.7.x"
 
 htmlparser2@^3.9.1:
   version "3.9.2"
@@ -3670,6 +3694,12 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
+koa-html-minifier@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/koa-html-minifier/-/koa-html-minifier-1.0.1.tgz#6838a0c2a6cfd58fa919f10fbefd746f2b1fd91e"
+  dependencies:
+    html-minifier "*"
+
 koa-is-json@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
@@ -4021,6 +4051,10 @@ loud-rejection@^1.0.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
+lower-case@^1.1.1:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.3.tgz#c92393d976793eee5ba4edb583cf8eae35bd9bfb"
+
 lowercase-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
@@ -4228,6 +4262,12 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
+ncname@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ncname/-/ncname-1.0.0.tgz#5b57ad18b1ca092864ef62b0b1ed8194f383b71c"
+  dependencies:
+    xml-char-classes "^1.0.0"
+
 negotiator@0.4.9:
   version "0.4.9"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.4.9.tgz#92e46b6db53c7e421ed64a2bc94f08be7630df3f"
@@ -4241,6 +4281,12 @@ nested-error-stacks@^1.0.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-1.0.2.tgz#19f619591519f096769a5ba9a86e6eeec823c3cf"
   dependencies:
     inherits "~2.0.1"
+
+no-case@^2.2.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
+  dependencies:
+    lower-case "^1.1.1"
 
 node-fetch@^1.0.1:
   version "1.6.3"
@@ -4597,6 +4643,12 @@ package-json@^1.0.0:
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
+
+param-case@2.1.x:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/param-case/-/param-case-2.1.0.tgz#2619f90fd6c829ed0b958f1c84ed03a745a6d70a"
+  dependencies:
+    no-case "^2.2.0"
 
 parse-asn1@^5.0.0:
   version "5.0.0"
@@ -5663,6 +5715,10 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
+relateurl@0.2.x:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
+
 repeat-element@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/repeat-element/-/repeat-element-1.1.2.tgz#ef089a178d1483baae4d93eb98b4f9e4e11d990a"
@@ -6413,7 +6469,7 @@ ua-parser-js@^0.7.9:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@^2.6, uglify-js@^2.7.0, uglify-js@^2.7.5:
+uglify-js@2.7.x, uglify-js@^2.6, uglify-js@^2.7.0, uglify-js@^2.7.5:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
   dependencies:
@@ -6483,6 +6539,10 @@ update-notifier@0.5.0:
     repeating "^1.1.2"
     semver-diff "^2.0.0"
     string-length "^1.0.0"
+
+upper-case@^1.1.1:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
 urix@^0.1.0, urix@~0.1.0:
   version "0.1.0"
@@ -6758,6 +6818,10 @@ xdg-basedir@^2.0.0:
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-2.0.0.tgz#edbc903cc385fc04523d966a335504b5504d1bd2"
   dependencies:
     os-homedir "^1.0.0"
+
+xml-char-classes@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
 
 xmlhttprequest-ssl@1.5.1:
   version "1.5.1"
