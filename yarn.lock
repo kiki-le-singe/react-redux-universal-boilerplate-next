@@ -1318,6 +1318,10 @@ camelcase@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
+camelize@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
+
 caniuse-api@^1.3.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-1.5.2.tgz#8f393c682f661c0a997b77bba6e826483fb3600e"
@@ -1614,6 +1618,15 @@ configstore@^1.0.0:
     write-file-atomic "^1.1.2"
     xdg-basedir "^2.0.0"
 
+connect@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/connect/-/connect-3.4.1.tgz#a21361d3f4099ef761cda6dc4a973bb1ebb0a34d"
+  dependencies:
+    debug "~2.2.0"
+    finalhandler "0.4.1"
+    parseurl "~1.3.1"
+    utils-merge "1.0.0"
+
 connect@^3.3.5:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/connect/-/connect-3.5.0.tgz#b357525a0b4c1f50599cd983e1d9efeea9677198"
@@ -1645,6 +1658,12 @@ content-disposition@~0.5.0:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
 
+content-security-policy-builder@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/content-security-policy-builder/-/content-security-policy-builder-1.0.0.tgz#11fd40c5cc298a6c725a35f9acf71e82ab5d3243"
+  dependencies:
+    dashify "^0.2.0"
+
 content-type@^1.0.0, content-type@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.2.tgz#b7d113aee7a8dd27bd21133c4dc2529df1721eed"
@@ -1672,7 +1691,7 @@ core-js@^2.2.0, core-js@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
-core-util-is@~1.0.0:
+core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
@@ -1891,6 +1910,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dashify@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/dashify/-/dashify-0.2.2.tgz#6a07415a01c91faf4a32e38d9dfba71f61cb20fe"
+
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -1971,7 +1994,7 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
 
-depd@^1.1.0, depd@~1.1.0:
+depd@1.1.0, depd@^1.1.0, depd@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
 
@@ -2007,6 +2030,10 @@ diffie-hellman@^5.0.0:
     bn.js "^4.1.0"
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
+
+dns-prefetch-control@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/dns-prefetch-control/-/dns-prefetch-control-0.1.0.tgz#60ddb457774e178f1f9415f0cabb0e85b0b300b2"
 
 doctrine@1.5.0, doctrine@^1.2.2:
   version "1.5.0"
@@ -2059,6 +2086,10 @@ domutils@1.5.1, domutils@^1.5.1:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dont-sniff-mimetype@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
 dotenv@^2.0.0:
   version "2.0.0"
@@ -2608,6 +2639,15 @@ fill-range@^2.1.0:
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
+finalhandler@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-0.4.1.tgz#85a17c6c59a94717d262d61230d4b0ebe3d4a14d"
+  dependencies:
+    debug "~2.2.0"
+    escape-html "~1.0.3"
+    on-finished "~2.3.0"
+    unpipe "~1.0.0"
+
 finalhandler@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-0.5.0.tgz#e9508abece9b6dba871a6942a1d7911b91911ac7"
@@ -2677,6 +2717,10 @@ formatio@1.1.1:
   resolved "https://registry.yarnpkg.com/formatio/-/formatio-1.1.1.tgz#5ed3ccd636551097383465d996199100e86161e9"
   dependencies:
     samsam "~1.1"
+
+frameguard@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/frameguard/-/frameguard-2.0.0.tgz#30c2c149e5e3505f9e156f9bc491a438420e487e"
 
 fresh@^0.3.0:
   version "0.3.0"
@@ -3009,6 +3053,36 @@ he@1.1.x:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.0.tgz#29319d49beec13a9b1f3c4f9b2a6dde4859bb2a7"
 
+helmet-csp@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/helmet-csp/-/helmet-csp-1.2.2.tgz#085c0307d57fc96cd97337f170ab8bfea99e5df7"
+  dependencies:
+    camelize "1.0.0"
+    content-security-policy-builder "1.0.0"
+    lodash.reduce "4.5.0"
+    platform "1.3.1"
+
+helmet@^2.1.1:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/helmet/-/helmet-2.3.0.tgz#d655c85b55b0a3bf722a4c2c66e48b78b4161b91"
+  dependencies:
+    connect "3.4.1"
+    dns-prefetch-control "0.1.0"
+    dont-sniff-mimetype "1.0.0"
+    frameguard "2.0.0"
+    helmet-csp "1.2.2"
+    hide-powered-by "1.0.0"
+    hpkp "1.2.0"
+    hsts "1.0.0"
+    ienoopen "1.0.0"
+    nocache "1.0.1"
+    referrer-policy "1.0.0"
+    x-xss-protection "1.0.0"
+
+hide-powered-by@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hide-powered-by/-/hide-powered-by-1.0.0.tgz#4a85ad65881f62857fc70af7174a1184dccce32b"
+
 history@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/history/-/history-3.2.1.tgz#71c7497f4e6090363d19a6713bb52a1bfcdd99aa"
@@ -3036,6 +3110,16 @@ home-or-tmp@^2.0.0:
 hosted-git-info@^2.1.4:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.1.5.tgz#0ba81d90da2e25ab34a332e6ec77936e1598118b"
+
+hpkp@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hpkp/-/hpkp-1.2.0.tgz#83f2cb38b26cff21daf26e2ff4b57126921dec65"
+
+hsts@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hsts/-/hsts-1.0.0.tgz#98e1039ef7aba554057b6b0e32584c0b1143a414"
+  dependencies:
+    core-util-is "1.0.2"
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
@@ -3137,6 +3221,10 @@ icss-replace-symbols@^1.0.2:
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+
+ienoopen@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ienoopen/-/ienoopen-1.0.0.tgz#346a428f474aac8f50cf3784ea2d0f16f62bda6b"
 
 ignore-by-default@^1.0.0:
   version "1.0.1"
@@ -3694,6 +3782,12 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
+koa-helmet@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/koa-helmet/-/koa-helmet-2.0.0.tgz#0b85da9fcc6f1f6ac905bdb6023ff4a4b5d2b88d"
+  dependencies:
+    helmet "^2.1.1"
+
 koa-html-minifier@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/koa-html-minifier/-/koa-html-minifier-1.0.1.tgz#6838a0c2a6cfd58fa919f10fbefd746f2b1fd91e"
@@ -3973,6 +4067,10 @@ lodash.pick@^4.2.1:
 lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
+
+lodash.reduce@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.reduce/-/lodash.reduce-4.5.0.tgz#af7d2ec621062441e77d5bf408a1e071ef86691c"
 
 lodash.reduce@^4.4.0:
   version "4.6.0"
@@ -4287,6 +4385,12 @@ no-case@^2.2.0:
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
   dependencies:
     lower-case "^1.1.1"
+
+nocache@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/nocache/-/nocache-1.0.1.tgz#695c9f736926a7554f7365fa25e087941065bd36"
+  dependencies:
+    depd "1.1.0"
 
 node-fetch@^1.0.1:
   version "1.6.3"
@@ -4792,6 +4896,10 @@ pkg-up@^1.0.0:
   resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-1.0.0.tgz#3e08fb461525c4421624a33b9f7e6d0af5b05a26"
   dependencies:
     find-up "^1.0.0"
+
+platform@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.1.tgz#492210892335bd3131c0a08dda2d93ec3543e423"
 
 pleeease-filters@^3.0.0:
   version "3.0.0"
@@ -5659,6 +5767,10 @@ redux@^3.6.0:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.2"
+
+referrer-policy@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/referrer-policy/-/referrer-policy-1.0.0.tgz#f60eedc92f942b01a6118121ec932d66e8fd7e14"
 
 regenerate@^1.2.1:
   version "1.3.2"
@@ -6812,6 +6924,10 @@ ws@1.0.1:
   dependencies:
     options ">=0.0.5"
     ultron "1.0.x"
+
+x-xss-protection@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/x-xss-protection/-/x-xss-protection-1.0.0.tgz#898afb93869b24661cf9c52f9ee8db8ed0764dd9"
 
 xdg-basedir@^2.0.0:
   version "2.0.0"
