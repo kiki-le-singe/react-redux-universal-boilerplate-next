@@ -145,7 +145,8 @@
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "lint": "eslint src tests --ext .jsx,.js",
-    "setup": "better-npm-run setup"
+    "setup": "better-npm-run setup",
+    "postinstall" : "npm run setup"
   },
   "betterScripts": {
     "dev": {
