@@ -25,21 +25,6 @@ function getCSSNextFiles() {
 }
 
 function sass() {
-  function removeWebpackAssets() {
-    return Promise
-      .resolve()
-      .then(() => {
-        const file = './webpack-assets.json'
-
-        try {
-          fs.removeSync(file)
-          sassDebug(`${file} has been deleted`)
-        } catch (err) {
-          sassDebug(err)
-        }
-      })
-  }
-
   function removeCSSNextFiles() {
     return Promise
       .resolve(getCSSNextFiles())
@@ -57,9 +42,7 @@ function sass() {
 
   sassDebug('All CSSNEXT (styles, config) files are going to be deleted')
 
-  return Promise.all([removeWebpackAssets(), removeCSSNextFiles()]).then(() => {
-    sassDebug('Congratulations you are going to use SASS 👏 .')
-  })
+  return removeCSSNextFiles().then(() => sassDebug('Congratulations you are going to use SASS 👏 .'))
 }
 
 function cssnext() {
