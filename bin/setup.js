@@ -4,12 +4,7 @@ const globby = require('globby')
 const debug = require('debug')
 
 const _debug = debug('app:bin:setup')
-
-const cssnextFiles = [
-  './*(webpack|src)/**/*.cssnext.*',
-  './src/common/styles.cssnext',
-  './postcss.config.cssnext.js',
-]
+const sassDebug = debug('app:bin:setup:sass')
 
 const questions = [
   {
@@ -20,36 +15,50 @@ const questions = [
   },
 ]
 
+function getCSSNextFiles() {
+  return globby([
+    './*(webpack|src)/**/*.cssnext.*',
+    './src/common/styles.cssnext',
+    './postcss.config.cssnext.js',
+  ])
+}
 
 function sass() {
-  const sassDebug = debug('app:bin:setup:sass')
+  function removeWebpackAssets() {
+    return Promise
+      .resolve()
+      .then(() => {
+        const file = './webpack-assets.json'
 
-  return Promise.resolve()
-    .then(() => {
-      sassDebug('All CSSNEXT (styles, config) files are going to be deleted')
-    })
-    .then(() => {
-      const file = './webpack-assets.json'
-
-      fs.remove(file, (err) => {
-        if (err) return sassDebug(err)
-        return sassDebug(`${file} has been deleted`)
+        try {
+          fs.removeSync(file)
+          sassDebug(`${file} has been deleted`)
+        } catch (err) {
+          sassDebug(err)
+        }
       })
-    })
-    .then(() => {
-      globby(cssnextFiles)
-        .then((paths) => {
-          paths.forEach((filePath) => {
-            fs.remove(filePath, (err) => {
-              if (err) return sassDebug(err)
-              return sassDebug(`${filePath} has been deleted`)
-            })
-          })
+  }
+
+  function removeCSSNextFiles() {
+    return Promise
+      .resolve(getCSSNextFiles())
+      .then((cssnextFiles) => {
+        cssnextFiles.forEach((filePath) => {
+          try {
+            fs.removeSync(filePath)
+            sassDebug(`${filePath} has been deleted`)
+          } catch (err) {
+            sassDebug(err)
+          }
         })
-    })
-    .then(() => {
-      sassDebug('Congratulations you are going to use SASS 👏 .')
-    })
+      })
+  }
+
+  sassDebug('All CSSNEXT (styles, config) files are going to be deleted')
+
+  return Promise.all([removeWebpackAssets(), removeCSSNextFiles()]).then(() => {
+    sassDebug('Congratulations you are going to use SASS 👏 .')
+  })
 }
 
 function cssnext() {
