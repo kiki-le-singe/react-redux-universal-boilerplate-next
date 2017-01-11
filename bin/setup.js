@@ -1,7 +1,7 @@
-const inquirer = require('inquirer')
-const fs = require('fs-extra')
-const globby = require('globby')
-const debug = require('debug')
+import inquirer from 'inquirer'
+import fs from 'fs-extra'
+import globby from 'globby'
+import debug from 'debug'
 
 const _debug = debug('app:bin:setup')
 const sassDebug = debug('app:bin:setup:sass')
