@@ -96,7 +96,15 @@ function cssnext() {
 inquirer.prompt(questions)
   .then(answers => (answers.setup ? cssnext() : sass()))
   .then(() => {
-    _debug('This setup (bin/setup.js) will self-destruct 💥 .')
+    _debug('`bin` dir will self-destruct 💥 .')
+
+    try {
+      const file = './bin'
+      fs.removeSync(file)
+      _debug('Setup has completed successfully.')
+    } catch (err) {
+      _debug(err)
+    }
   })
   .catch((err) => {
     _debug('Setup encountered an error.', err)
