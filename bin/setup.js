@@ -5,6 +5,7 @@ const debug = require('debug')
 
 const _debug = debug('app:bin:setup')
 const sassDebug = debug('app:bin:setup:sass')
+const cssnextDebug = debug('app:bin:setup:cssnext')
 
 const questions = [
   {
@@ -62,51 +63,51 @@ function sass() {
 }
 
 function cssnext() {
-  const cssnextDebug = debug('app:bin:setup:cssnext')
+  function removeSASSFiles() {
+    return Promise
+      .resolve(getCSSNextFiles())
+      .then((cssnextFiles) => {
+        cssnextFiles.forEach((filePath) => {
+          const renamedPath = filePath.replace('.cssnext', '')
 
-  return Promise.resolve()
-    .then(() => {
-      cssnextDebug('All SASS (styles, config) files are going to be deleted')
-    })
-    .then(() => {
-      globby(cssnextFiles)
-        .then((paths) => {
-          paths.forEach((filePath) => {
-            const renamedPath = filePath.replace('.cssnext', '')
-
-            try {
-              fs.removeSync(renamedPath)
-              cssnextDebug(`${renamedPath} has been deleted`)
-            } catch (err) {
-              cssnextDebug(err)
-            }
-          })
+          try {
+            fs.removeSync(renamedPath)
+            cssnextDebug(`${renamedPath} has been deleted`)
+          } catch (err) {
+            cssnextDebug(err)
+          }
         })
-    })
-    .then(() => {
-      globby(cssnextFiles)
-        .then((paths) => {
-          paths.forEach((filePath) => {
-            const renamedPath = filePath.replace('.cssnext', '')
+      })
+  }
 
-            fs.move(filePath, renamedPath, (err) => {
-              if (err) return cssnextDebug(err)
-              return cssnextDebug(`${filePath} has been renamed to ${renamedPath}`)
-            })
-          })
-
-          const filePath = './src/common/views/AboutView/AboutView.scss'
-          const renamedPath = './src/common/views/AboutView/AboutView.css'
+  function renameCSSNextFiles() {
+    return Promise
+      .resolve(getCSSNextFiles())
+      .then((cssnextFiles) => {
+        cssnextFiles.forEach((filePath) => {
+          const renamedPath = filePath.replace('.cssnext', '')
 
           fs.move(filePath, renamedPath, (err) => {
             if (err) return cssnextDebug(err)
             return cssnextDebug(`${filePath} has been renamed to ${renamedPath}`)
           })
         })
-    })
-    .then(() => {
-      cssnextDebug('Congratulations you are going to use CSSNEXT 👏 .')
-    })
+
+        const filePath = './src/common/views/AboutView/AboutView.scss'
+        const renamedPath = './src/common/views/AboutView/AboutView.css'
+
+        fs.move(filePath, renamedPath, (err) => {
+          if (err) return cssnextDebug(err)
+          return cssnextDebug(`${filePath} has been renamed to ${renamedPath}`)
+        })
+      })
+  }
+
+  cssnextDebug('All SASS (styles, config) files are going to be deleted')
+
+  return Promise.all([removeSASSFiles(), renameCSSNextFiles()]).then(() => {
+    cssnextDebug('Congratulations you are going to use CSSNEXT 👏 .')
+  })
 }
 
 inquirer.prompt(questions)
