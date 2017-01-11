@@ -53,6 +53,8 @@
     "debug": "^2.4.4",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "fs-extra": "^1.0.0",
+    "globby": "^6.1.0",
+    "inquirer": "^2.0.0",
     "ip": "^1.1.4",
     "koa": "^2.0.0",
     "koa-compress": "next",
@@ -142,7 +144,9 @@
     "start:client:server": "better-npm-run start:client:server",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
-    "lint": "eslint src tests --ext .jsx,.js"
+    "lint": "eslint src tests --ext .jsx,.js",
+    "setup": "better-npm-run setup",
+    "postinstall" : "npm run setup"
   },
   "betterScripts": {
     "dev": {
@@ -199,6 +203,12 @@
       "command": "babel-node node_modules/.bin/karma start",
       "env": {
         "NODE_ENV": "test",
+        "DEBUG": "app:*"
+      }
+    },
+    "setup": {
+      "command": "babel-node bin/setup",
+      "env": {
         "DEBUG": "app:*"
       }
     }
