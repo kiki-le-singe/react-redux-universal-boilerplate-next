@@ -38,7 +38,8 @@ const config = {
   DIR_BUILD: 'build',
   DIR_SERVER: 'server',
   DIR_TEST: '__tests__',
-  DIR_NODE_MODULES: 'node_modules'
+  DIR_NODE_MODULES: 'node_modules',
+  DIR_PROJECT_CONFIG: 'config',
 }
 
 const paths = (dir = 'base') => {
@@ -58,7 +59,8 @@ const paths = (dir = 'base') => {
     build: base(config.DIR_BUILD),
     server: base(config.DIR_SERVER),
     test: base(config.DIR_TEST),
-    nodeModules: base(config.DIR_NODE_MODULES)
+    nodeModules: base(config.DIR_NODE_MODULES),
+    projectConfig: base(config.DIR_PROJECT_CONFIG),
   }
 
   return _paths[dir]
