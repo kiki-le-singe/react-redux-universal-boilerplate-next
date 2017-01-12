@@ -1,3 +1,4 @@
+import path from 'path'
 import webpack from 'webpack'
 import nodeExternals from 'webpack-node-externals'
 import _debug from 'debug'
@@ -6,6 +7,7 @@ import projectConfig, { paths } from '../config'
 
 const debug = _debug('app:webpack:config:server')
 const srcDir = paths('src')
+const projectConfigDir = paths('projectConfig')
 const {
   __DEV__,
   __PROD__
@@ -45,12 +47,12 @@ const config = {
         test: /\.js[x]?$/,
         enforce: 'pre',
         loader: 'eslint-loader',
-        include: [srcDir],
+        include: [srcDir, projectConfigDir],
       },
       {
         test: /\.js[x]?$/,
         loader: 'babel-loader',
-        include: [srcDir],
+        include: [srcDir, projectConfigDir],
         options: {
           cacheDirectory: true,
         }
@@ -75,6 +77,29 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        sequences: true,
+        dead_code: true,
+        drop_debugger: true,
+        comparisons: true,
+        conditionals: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        hoist_funs: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: true
+    }),
     // source-map-support: Useful to add source map support to node.js
     new webpack.BannerPlugin({
       banner: 'require("source-map-support").install();',
