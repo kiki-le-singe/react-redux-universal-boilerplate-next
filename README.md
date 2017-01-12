@@ -1,5 +1,11 @@
 # React Redux Universal Boilerplate
 
+## Introduction
+
+> I started this project to learn tools like [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [Webpack](https://webpack.js.org/), [babeljs.io](https://babeljs.io/), [ES6/ES2015](https://babeljs.io/docs/learn-es2015/)... I did it mainly for fun. But it will be maintained and then I used it as Boilerplate for my React|Redux projects. So don't worry it works :p. It's not perfect but it works :).
+
+> Enjoy it! :)
+
 An Universal ReactJS/Redux Boilerplate.
 
 ## Requirements
