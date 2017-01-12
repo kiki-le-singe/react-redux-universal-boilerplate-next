@@ -26,9 +26,6 @@ const {
 
 debug('Create configuration.')
 const config = {
-  performance: {
-    hints: false
-  },
   cache: true,
   context: paths('base'),
   devtool: 'source-map',

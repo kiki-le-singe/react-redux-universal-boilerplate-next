@@ -36,6 +36,9 @@ const {
 
 debug('Create configuration.')
 const config = {
+  performance: {
+    hints: 'warning'
+  },
   context: paths('base'),
   devtool: 'source-map',
   entry: {
