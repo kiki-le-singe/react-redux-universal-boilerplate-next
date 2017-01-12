@@ -18,6 +18,10 @@ export default function CounterView({ counter, increment, decrement }) {
 
 CounterView.propTypes = {
   counter: PropTypes.number,
-  increment: PropTypes.func,
-  decrement: PropTypes.func,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+}
+
+CounterView.defaultProps = {
+  counter: 0,
 }

@@ -7,6 +7,9 @@ import config from '../../config'
 const propTypes = {
   children: PropTypes.object
 }
+const defaultProps = {
+  children: {}
+}
 
 function AppLayout(props) {
   return (
@@ -28,5 +31,6 @@ function AppLayout(props) {
 }
 
 AppLayout.propTypes = propTypes
+AppLayout.defaultProps = defaultProps
 
 export default AppLayout
