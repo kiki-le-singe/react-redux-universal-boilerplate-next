@@ -2,6 +2,16 @@
 
 An Universal ReactJS/Redux Boilerplate.
 
+## Requirements
+
+ * [nodejs](http://nodejs.org/)
+
+> Node `>=6.0.0`
+
+## Optional
+
+ * [yarn](https://yarnpkg.com/)
+
 ## Installation
 
 ```shell
