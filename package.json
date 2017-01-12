@@ -1,6 +1,6 @@
 {
   "name": "react-redux-universal-boilerplate-next",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "author": {
     "name": "Kiki le singe"
   },
@@ -148,7 +148,7 @@
     "test:dev": "npm run test -- --watch",
     "lint": "eslint src tests --ext .jsx,.js",
     "setup": "better-npm-run setup",
-    "postinstall" : "npm run setup"
+    "postinstall": "npm run setup"
   },
   "betterScripts": {
     "dev": {
