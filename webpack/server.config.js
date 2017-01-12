@@ -23,7 +23,6 @@ const config = {
     path: paths('distServer'),
     filename: 'server.js',
     libraryTarget: 'commonjs2',
-    publicPath: '/dist_server/',
   },
   node: { // https://webpack.github.io/docs/configuration.html#node
     console: true,
