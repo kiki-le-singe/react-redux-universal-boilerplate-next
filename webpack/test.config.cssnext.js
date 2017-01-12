@@ -21,9 +21,6 @@ const {
 
 debug('Create configuration.')
 const config = {
-  performance: {
-    hints: false
-  },
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],

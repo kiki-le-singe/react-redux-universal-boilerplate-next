@@ -29,9 +29,6 @@ const {
 
 debug('Create configuration.')
 const config = {
-  performance: {
-    hints: false
-  },
   cache: true,
   context: paths('base'),
   devtool: 'source-map',
@@ -126,7 +123,7 @@ const config = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
