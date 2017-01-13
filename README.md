@@ -34,7 +34,7 @@ $ npm install or yarn
 $ npm run setup
 ```
 
-Allows to choose between sass or cssnext. This question you will be asked: `You will use SASS as CSS extension language 😉 . Do you wish to use CSSNEXT 😀 ? This choice is irreversible. Obviously you can install the project again or just use your version control system to discard changes in working directory.`
+Allows to choose between sass or cssnext and clean up unnecessary files. This question you will be asked: `You will use SASS as CSS extension language 😉 . Do you wish to use CSSNEXT 😀 ? This choice is irreversible. Obviously you can install the project again or just use your version control system to discard changes in working directory.`
 
 > This script runs on postinstall script (see package.json).
 
